@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProyectoRestaurante.Models.Valoracion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FKTipoDeValoracionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FKSucursalID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FKTipoDeValoracionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FKSucursalID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ValoracionID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ValoracionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ValoracionID })
+        </td>
+    </tr>
+}
+
+</table>

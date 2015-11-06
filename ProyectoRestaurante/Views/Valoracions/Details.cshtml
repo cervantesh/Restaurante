@@ -1,0 +1,42 @@
+﻿@model ProyectoRestaurante.Models.Valoracion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Valoracion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FKTipoDeValoracionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FKTipoDeValoracionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FKSucursalID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FKSucursalID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ValoracionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

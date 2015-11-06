@@ -1,0 +1,50 @@
+﻿@model ProyectoRestaurante.Models.Sucursal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sucursal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.longitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FKRestauranteID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FKRestauranteID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FKDireccionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FKDireccionID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SucursalID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

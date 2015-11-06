@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ContactoSucursal">
+          <Key>
+            <PropertyRef Name="ContactoSucursalID" />
+          </Key>
+          <Property Name="ContactoSucursalID" Type="int" Nullable="false" />
+          <Property Name="E_mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contacto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FKSucursalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="CuentaID" />
+          </Key>
+          <Property Name="CuentaID" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contrasenia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="int" />
+          <Property Name="FKUsuarioID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="DireccionID" />
+          </Key>
+          <Property Name="DireccionID" Type="int" Nullable="false" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Ciudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FKSucursalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestauranteID" />
+          </Key>
+          <Property Name="RestauranteID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="limite_inferior" Type="money" Nullable="false" />
+          <Property Name="limite_superior" Type="money" Nullable="false" />
+          <Property Name="CantSucursales" Type="int" />
+          <Property Name="FKTipoRestauranteID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="SucursalID" />
+          </Key>
+          <Property Name="SucursalID" Type="int" Nullable="false" />
+          <Property Name="longitud" Type="float" Nullable="false" />
+          <Property Name="latitud" Type="float" Nullable="false" />
+          <Property Name="FKRestauranteID" Type="int" Nullable="false" />
+          <Property Name="FKDireccionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDeValoracion">
+          <Key>
+            <PropertyRef Name="TipoDeValoracionID" />
+          </Key>
+          <Property Name="TipoDeValoracionID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRestaurante">
+          <Key>
+            <PropertyRef Name="TipoRestauranteID" />
+          </Key>
+          <Property Name="TipoRestauranteID" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SegundoNombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SegundoApelido" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Valoracion">
+          <Key>
+            <PropertyRef Name="ValoracionID" />
+          </Key>
+          <Property Name="ValoracionID" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+          <Property Name="FKTipoDeValoracionID" Type="int" Nullable="false" />
+          <Property Name="FKSucursalID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ContactoS__FKSuc__21B6055D">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="ContactoSucursal" Type="Self.ContactoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="ContactoSucursal">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__FKUsuari__267ABA7A">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="FKUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__FKSuc__1920BF5C">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__FKTip__1273C1CD">
+          <End Role="TipoRestaurante" Type="Self.TipoRestaurante" Multiplicity="1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRestaurante">
+              <PropertyRef Name="TipoRestauranteID" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="FKTipoRestauranteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sucursal__FKDire__182C9B23">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="DireccionID" />
+            </Principal>
+            <Dependent Role="Sucursal">
+              <PropertyRef Name="FKDireccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sucursal__FKRest__173876EA">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestauranteID" />
+            </Principal>
+            <Dependent Role="Sucursal">
+              <PropertyRef Name="FKRestauranteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Valoracio__FKSuc__1ED998B2">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Valoracion" Type="Self.Valoracion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="Valoracion">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Valoracio__FKTip__1DE57479">
+          <End Role="TipoDeValoracion" Type="Self.TipoDeValoracion" Multiplicity="1" />
+          <End Role="Valoracion" Type="Self.Valoracion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeValoracion">
+              <PropertyRef Name="TipoDeValoracionID" />
+            </Principal>
+            <Dependent Role="Valoracion">
+              <PropertyRef Name="FKTipoDeValoracionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteModelStoreContainer">
+          <EntitySet Name="ContactoSucursal" EntityType="Self.ContactoSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeValoracion" EntityType="Self.TipoDeValoracion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRestaurante" EntityType="Self.TipoRestaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Valoracion" EntityType="Self.Valoracion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ContactoS__FKSuc__21B6055D" Association="Self.FK__ContactoS__FKSuc__21B6055D">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="ContactoSucursal" EntitySet="ContactoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__FKUsuari__267ABA7A" Association="Self.FK__Cuenta__FKUsuari__267ABA7A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__FKSuc__1920BF5C" Association="Self.FK__Direccion__FKSuc__1920BF5C">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__FKTip__1273C1CD" Association="Self.FK__Restauran__FKTip__1273C1CD">
+            <End Role="TipoRestaurante" EntitySet="TipoRestaurante" />
+            <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sucursal__FKDire__182C9B23" Association="Self.FK__Sucursal__FKDire__182C9B23">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sucursal__FKRest__173876EA" Association="Self.FK__Sucursal__FKRest__173876EA">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Valoracio__FKSuc__1ED998B2" Association="Self.FK__Valoracio__FKSuc__1ED998B2">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Valoracion" EntitySet="Valoracion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Valoracio__FKTip__1DE57479" Association="Self.FK__Valoracio__FKTip__1DE57479">
+            <End Role="TipoDeValoracion" EntitySet="TipoDeValoracion" />
+            <End Role="Valoracion" EntitySet="Valoracion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ContactoSucursal">
+          <Key>
+            <PropertyRef Name="ContactoSucursalID" />
+          </Key>
+          <Property Name="ContactoSucursalID" Type="Int32" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FKSucursalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK__ContactoS__FKSuc__21B6055D" FromRole="ContactoSucursal" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="CuentaID" />
+          </Key>
+          <Property Name="CuentaID" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasenia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activo" Type="Int32" />
+          <Property Name="FKUsuarioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK__Cuenta__FKUsuari__267ABA7A" FromRole="Cuenta" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="DireccionID" />
+          </Key>
+          <Property Name="DireccionID" Type="Int32" Nullable="false" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FKSucursalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK__Direccion__FKSuc__1920BF5C" FromRole="Direccion" ToRole="Sucursal" />
+          <NavigationProperty Name="Sucursal1" Relationship="Self.FK__Sucursal__FKDire__182C9B23" FromRole="Direccion" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestauranteID" />
+          </Key>
+          <Property Name="RestauranteID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="limite_inferior" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="limite_superior" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CantSucursales" Type="Int32" />
+          <Property Name="FKTipoRestauranteID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoRestaurante" Relationship="Self.FK__Restauran__FKTip__1273C1CD" FromRole="Restaurant" ToRole="TipoRestaurante" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK__Sucursal__FKRest__173876EA" FromRole="Restaurant" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="SucursalID" />
+          </Key>
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="longitud" Type="Double" Nullable="false" />
+          <Property Name="latitud" Type="Double" Nullable="false" />
+          <Property Name="FKRestauranteID" Type="Int32" Nullable="false" />
+          <Property Name="FKDireccionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContactoSucursal" Relationship="Self.FK__ContactoS__FKSuc__21B6055D" FromRole="Sucursal" ToRole="ContactoSucursal" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Direccion__FKSuc__1920BF5C" FromRole="Sucursal" ToRole="Direccion" />
+          <NavigationProperty Name="Direccion1" Relationship="Self.FK__Sucursal__FKDire__182C9B23" FromRole="Sucursal" ToRole="Direccion" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Sucursal__FKRest__173876EA" FromRole="Sucursal" ToRole="Restaurant" />
+          <NavigationProperty Name="Valoracion" Relationship="Self.FK__Valoracio__FKSuc__1ED998B2" FromRole="Sucursal" ToRole="Valoracion" />
+        </EntityType>
+        <EntityType Name="TipoDeValoracion">
+          <Key>
+            <PropertyRef Name="TipoDeValoracionID" />
+          </Key>
+          <Property Name="TipoDeValoracionID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Valoracion" Relationship="Self.FK__Valoracio__FKTip__1DE57479" FromRole="TipoDeValoracion" ToRole="Valoracion" />
+        </EntityType>
+        <EntityType Name="TipoRestaurante">
+          <Key>
+            <PropertyRef Name="TipoRestauranteID" />
+          </Key>
+          <Property Name="TipoRestauranteID" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Restauran__FKTip__1273C1CD" FromRole="TipoRestaurante" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SegundoApelido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__FKUsuari__267ABA7A" FromRole="Usuario" ToRole="Cuenta" />
+        </EntityType>
+        <EntityType Name="Valoracion">
+          <Key>
+            <PropertyRef Name="ValoracionID" />
+          </Key>
+          <Property Name="ValoracionID" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Int32" Nullable="false" />
+          <Property Name="FKTipoDeValoracionID" Type="Int32" Nullable="false" />
+          <Property Name="FKSucursalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK__Valoracio__FKSuc__1ED998B2" FromRole="Valoracion" ToRole="Sucursal" />
+          <NavigationProperty Name="TipoDeValoracion" Relationship="Self.FK__Valoracio__FKTip__1DE57479" FromRole="Valoracion" ToRole="TipoDeValoracion" />
+        </EntityType>
+        <Association Name="FK__ContactoS__FKSuc__21B6055D">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="ContactoSucursal" Type="Self.ContactoSucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="ContactoSucursal">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cuenta__FKUsuari__267ABA7A">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cuenta">
+              <PropertyRef Name="FKUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__FKSuc__1920BF5C">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sucursal__FKDire__182C9B23">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="DireccionID" />
+            </Principal>
+            <Dependent Role="Sucursal">
+              <PropertyRef Name="FKDireccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__FKTip__1273C1CD">
+          <End Role="TipoRestaurante" Type="Self.TipoRestaurante" Multiplicity="1" />
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRestaurante">
+              <PropertyRef Name="TipoRestauranteID" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="FKTipoRestauranteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sucursal__FKRest__173876EA">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestauranteID" />
+            </Principal>
+            <Dependent Role="Sucursal">
+              <PropertyRef Name="FKRestauranteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Valoracio__FKSuc__1ED998B2">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="Valoracion" Type="Self.Valoracion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="Valoracion">
+              <PropertyRef Name="FKSucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Valoracio__FKTip__1DE57479">
+          <End Role="TipoDeValoracion" Type="Self.TipoDeValoracion" Multiplicity="1" />
+          <End Role="Valoracion" Type="Self.Valoracion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeValoracion">
+              <PropertyRef Name="TipoDeValoracionID" />
+            </Principal>
+            <Dependent Role="Valoracion">
+              <PropertyRef Name="FKTipoDeValoracionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ContactoSucursal" EntityType="Self.ContactoSucursal" />
+          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" />
+          <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
+          <EntitySet Name="TipoDeValoracion" EntityType="Self.TipoDeValoracion" />
+          <EntitySet Name="TipoRestaurante" EntityType="Self.TipoRestaurante" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Valoracion" EntityType="Self.Valoracion" />
+          <AssociationSet Name="FK__ContactoS__FKSuc__21B6055D" Association="Self.FK__ContactoS__FKSuc__21B6055D">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="ContactoSucursal" EntitySet="ContactoSucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cuenta__FKUsuari__267ABA7A" Association="Self.FK__Cuenta__FKUsuari__267ABA7A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__FKSuc__1920BF5C" Association="Self.FK__Direccion__FKSuc__1920BF5C">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sucursal__FKDire__182C9B23" Association="Self.FK__Sucursal__FKDire__182C9B23">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__FKTip__1273C1CD" Association="Self.FK__Restauran__FKTip__1273C1CD">
+            <End Role="TipoRestaurante" EntitySet="TipoRestaurante" />
+            <End Role="Restaurant" EntitySet="Restaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sucursal__FKRest__173876EA" Association="Self.FK__Sucursal__FKRest__173876EA">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Sucursal" EntitySet="Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Valoracio__FKSuc__1ED998B2" Association="Self.FK__Valoracio__FKSuc__1ED998B2">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Valoracion" EntitySet="Valoracion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Valoracio__FKTip__1DE57479" Association="Self.FK__Valoracio__FKTip__1DE57479">
+            <End Role="TipoDeValoracion" EntitySet="TipoDeValoracion" />
+            <End Role="Valoracion" EntitySet="Valoracion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="ContactoSucursal">
+            <EntityTypeMapping TypeName="RestauranteModel.ContactoSucursal">
+              <MappingFragment StoreEntitySet="ContactoSucursal">
+                <ScalarProperty Name="ContactoSucursalID" ColumnName="ContactoSucursalID" />
+                <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="FKSucursalID" ColumnName="FKSucursalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="RestauranteModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="CuentaID" ColumnName="CuentaID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FKUsuarioID" ColumnName="FKUsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="RestauranteModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="DireccionID" ColumnName="DireccionID" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="FKSucursalID" ColumnName="FKSucursalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant">
+            <EntityTypeMapping TypeName="RestauranteModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="RestauranteID" ColumnName="RestauranteID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="limite_inferior" ColumnName="limite_inferior" />
+                <ScalarProperty Name="limite_superior" ColumnName="limite_superior" />
+                <ScalarProperty Name="CantSucursales" ColumnName="CantSucursales" />
+                <ScalarProperty Name="FKTipoRestauranteID" ColumnName="FKTipoRestauranteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursal">
+            <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
+              <MappingFragment StoreEntitySet="Sucursal">
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="FKRestauranteID" ColumnName="FKRestauranteID" />
+                <ScalarProperty Name="FKDireccionID" ColumnName="FKDireccionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeValoracion">
+            <EntityTypeMapping TypeName="RestauranteModel.TipoDeValoracion">
+              <MappingFragment StoreEntitySet="TipoDeValoracion">
+                <ScalarProperty Name="TipoDeValoracionID" ColumnName="TipoDeValoracionID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRestaurante">
+            <EntityTypeMapping TypeName="RestauranteModel.TipoRestaurante">
+              <MappingFragment StoreEntitySet="TipoRestaurante">
+                <ScalarProperty Name="TipoRestauranteID" ColumnName="TipoRestauranteID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="RestauranteModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="SegundoApelido" ColumnName="SegundoApelido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valoracion">
+            <EntityTypeMapping TypeName="RestauranteModel.Valoracion">
+              <MappingFragment StoreEntitySet="Valoracion">
+                <ScalarProperty Name="ValoracionID" ColumnName="ValoracionID" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FKTipoDeValoracionID" ColumnName="FKTipoDeValoracionID" />
+                <ScalarProperty Name="FKSucursalID" ColumnName="FKSucursalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

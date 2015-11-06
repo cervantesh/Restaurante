@@ -1,0 +1,58 @@
+﻿@model ProyectoRestaurante.Models.Restaurant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.limite_inferior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.limite_inferior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.limite_superior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.limite_superior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantSucursales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantSucursales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FKTipoRestauranteID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FKTipoRestauranteID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RestauranteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

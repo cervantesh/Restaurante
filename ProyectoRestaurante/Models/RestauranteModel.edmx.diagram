@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c07a26ccb09741b38085f8f9a114c57f" Name="Diagram1">
+        <EntityTypeShape EntityType="RestauranteModel.ContactoSucursal" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Cuenta" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Direccion" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Restaurant" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Sucursal" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.TipoDeValoracion" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.TipoRestaurante" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Usuario" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="RestauranteModel.Valoracion" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="RestauranteModel.FK__ContactoS__FKSuc__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Cuenta__FKUsuari__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Direccion__FKSuc__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Sucursal__FKDire__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Restauran__FKTip__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Sucursal__FKRest__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Valoracio__FKSuc__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="RestauranteModel.FK__Valoracio__FKTip__1DE57479" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
